@@ -12,5 +12,8 @@ function GestureRecognizer() {}
  * Prototype
  */
 GestureRecognizer.prototype = {
-  state: 'possible'
+  state: 'possible',
+  gestureRecognizerShouldBegin: function () {
+    return true;
+  }
 };

@@ -9,5 +9,11 @@ describe('GestureRecognizer', function () {
         assert(GestureRecognizer.prototype.state === 'possible');
       });
     });
+
+    describe('.gestureRecognizerShouldBegin', function () {
+      it('should default to `true`', function(){
+        assert(GestureRecognizer.prototype.gestureRecognizerShouldBegin() === true);
+      });
+    });
   });
 });
