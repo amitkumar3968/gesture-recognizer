@@ -1,18 +1,13 @@
-
 # gesture-recognizer
 
-  an abstract base class for concrete gesture-recognizer classes
+> An abstract base class for concrete gesture-recognizer classes
 
 ## Installation
 
-  Install with [component(1)](http://component.io):
-
-    $ component install multi-touch/gesture-recognizer
-
-## API
-
-
+```sh
+component install multi-touch/gesture-recognizer
+```
 
 ## License
 
-  MIT
+MIT
