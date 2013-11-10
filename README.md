@@ -199,6 +199,32 @@ The view the gesture recognizer is attached to.
 
 You attach (or add) a gesture recognizer to a view by setting this property.
 
+## Instance Functions
+
+### `addTarget`
+
+Adds a target and an action to a gesture-recognizer object.
+
+`addTarget(target, action)`
+
+#### Arguments
+
+##### `target`
+
+An object that is a recipient of action messages sent by the receiver when the
+represented gesture occurs. `null` is not a valid value.
+
+##### `action`
+
+A `String`, representing the name of a function on the `target` object, that is
+to be invoked by the action message. `null` is not a valid value.
+
+#### Discussion
+
+You may call this method multiple times to specify target-action pairs. However,
+if you request to add a target-action pair that has already been added, then the
+request is ignored.
+
 ## License
 
 MIT
