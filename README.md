@@ -114,6 +114,91 @@ and previously delivered touches are cancelled through a
 recognizer doesn't recognize its gesture or if the value of this property is
 `false`, the view receives all the touches in the multi-touch sequence.
 
+### `delaysTouchesBegan`
+
+A Boolean value determining whether the receiver delays sending touches in a
+begin phase to its view.
+
+#### Discussion
+
+When the value of this property is `false` (the default), views analyze touch
+events in `TouchPhaseBegan` and `TouchPhaseMoved` in parallel with the receiver.
+When the value of the property is `true`, the window suspends delivery of touch
+objects in the `TouchPhaseBegan` phase to the view. If the gesture recognizer
+subsequently recognizes its gesture, these touch objects are discarded. If the
+gesture recognizer, however, does not recognize its gesture, the window delivers
+these objects to the view in a [`touchesBegan`](#touchesbegan) message (and
+possibly a follow-up [`touchesMoved`](#touchesmoved) message to inform it of the
+touches’ current locations). Set this property to `true` to prevent views from
+processing any touches in the `TouchPhaseBegan` phase that may be recognized as
+part of this gesture.
+
+### `delaysTouchesEnded`
+
+A Boolean value determining whether the receiver delays sending touches in a end
+phase to its view.
+
+#### Discussion
+
+When the value of this property is `true` (the default) and the receiver is
+analyzing touch events, the window suspends delivery of touch objects in the
+`TouchPhaseEnded` phase to the attached view. If the gesture recognizer
+subsequently recognizes its gesture, these touch objects are cancelled (via a
+[`touchesCancelled`](#touchescancelled) message). If the gesture recognizer does
+not recognize its gesture, the window delivers these objects in an invocation of
+the view’s [`touchesEnded`](#touchesended) method. Set this property to `false`
+to have touch objects in the `TouchPhaseEnded` delivered to the view while the
+gesture recognizer is analyzing the same touches.
+
+### `delegate`
+
+The delegate of the gesture recognizer.
+
+#### Discussion
+
+The gesture recognizer maintains a weak reference to its delegate. The delegate
+must adopt the `GestureRecognizerDelegate` protocol and implement one or more of
+its methods.
+
+### `enabled`
+
+A Boolean property that indicates whether the gesture recognizer is enabled.
+
+#### Discussion
+
+Disables a gesture recognizers so it does not receive touches. The default value
+is `true`. If you change this property to `false` while a gesture recognizer is
+currently recognizing a gesture, the gesture recognizer transitions to a
+cancelled state.
+
+### `state`
+
+The current state of the gesture recognizer.
+
+#### Discussion
+
+The possible states a gesture recognizer can be in are represented by the
+constants of type `GestureRecognizerState`. Some of these states are not
+applicable to discrete gestures.
+
+Recognizers for discrete gestures transition from
+`GestureRecognizerStatePossible` to `GestureRecognizerStateFailed` or
+`GestureRecognizerStateRecognized`. Recognizers for continuous gesture
+transition from `GestureRecognizerStatePossible` to these phases in the given
+order: `GestureRecognizerStateBegan`, `GestureRecognizerStateChanged`, and
+`GestureRecognizerStateEnded`. If, however, they receive a cancellation touch,
+they should transition to `GestureRecognizerStateCancelled`. If recognizers for
+continuous gestures can’t interpret a multi-touch sequence as their gesture,
+they transition to `GestureRecognizerStateFailed`.
+
+### `view`
+
+The view the gesture recognizer is attached to.
+
+#### Discussion
+
+You attach (or add) a gesture recognizer to a view by setting this property.
+
 ## License
 
 MIT
