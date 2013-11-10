@@ -45,6 +45,75 @@ view are cancelled.
 component install multi-touch/gesture-recognizer
 ```
 
+## Tasks
+
+### Initializing a Gesture Recognizer
+
+[`initWithTarget`](#initwithtarget)
+
+### Adding and Removing Targets and Actions
+
+[`addTarget`](#addtarget)
+[`removeTarget`](#removetarget)
+
+### Getting the Touches and Location of a Gesture
+
+[`locationInView`](#addtarget)
+[`locationOfTouch`](#locationoftouch)
+[`numberOfTouches`](#numberoftouches)
+
+### Getting the Recognizer's State and View
+
+[`state`](#state) *property*
+[`view`](#view) *property*
+[`enabled`](#enabled) *property*
+
+### Canceling and Delaying Touches
+
+[`cancelsTouchesInView`](#cancelstouchesinview) *property*
+[`delaysTouchesBegan`](#delaystouchesbegan) *property*
+[`delaysTouchesEnded`](#delaystouchesended) *property*
+
+### Specifying Dependencies Between Gesture Recognizers
+
+[`requireGestureRecognizerToFail`](#requiregesturerecognizertofail)
+
+### Setting and Getting the Delegate
+
+[`delegate`](#delegate) *property*
+
+### Methods for Subclasses
+
+Below is a list of methods intended to be called or overriden *only* by
+subclasses of a `GestureRecognizer`. Clients that merely use concrete subclasses
+of `GestureRecognizer` must never call these methods.
+
+[`touchesBegan`](#touchesbegan)
+[`touchesMoved`](#touchesmoved)
+[`touchesEnded`](#touchesended)
+[`touchesCancelled`](#touchescancelled)
+[`reset`](#reset)
+[`ignoreTouch`](#ignoretouch)
+[`canBePreventedByGestureRecognizer`](#canbepreventedbygesturerecognizer)
+[`shouldRequireFailureOfGestureRecognizer`](#shouldrequirefailureofgesturerecognizer)
+[`shouldBeRequiredToFailByGestureRecognizer`](#shouldberequiredtofailbygesturerecognizer)
+
+## Properties
+
+### `cancelsTouchesInView`
+
+A Boolean value affecting whether touches are delivered to a view when a gesture
+is recognized.
+
+#### Discussion
+
+When this property is `true` (the default) and the receiver recognizes its
+gesture, the touches of that gesture are pending are not delivered to the view
+and previously delivered touches are cancelled through a
+[`touchesCancelled`](#touchescancelled) message sent to the view. If a gesture
+recognizer doesn't recognize its gesture or if the value of this property is
+`false`, the view receives all the touches in the multi-touch sequence.
+
 ## License
 
 MIT
