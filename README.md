@@ -1,4 +1,4 @@
-# Gesture Recognizer
+# GestureRecognizer
 
 > An abstract base class for concrete gesture-recognizer classes.
 
@@ -10,8 +10,8 @@ gesture, it sends an action message to each designated target object.
 
 The concrete subclasses of `GestureRecognizer` are the following:
 
-* [TapGestureRecognizer](https://github.com/multi-touch/tap-gesture-recognizer)
-* [PanGestureRecognizer](https://github.com/multi-touch/pan-gesture-recognizer)
+* [`TapGestureRecognizer`](https://github.com/multi-touch/tap-gesture-recognizer)
+* [`PanGestureRecognizer`](https://github.com/multi-touch/pan-gesture-recognizer)
 
 The `GestureRecognizer` class defines a set of common behaviors that can be
 configured for all concrete gesture recognizers. It can also communicate with
