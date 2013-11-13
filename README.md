@@ -228,3 +228,7 @@ request is ignored.
 ## License
 
 MIT
+
+## Credits
+
+Apple
