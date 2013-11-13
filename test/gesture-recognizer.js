@@ -4,17 +4,19 @@ var gestureRecognizer = new GestureRecognizer(document);
 
 describe('GestureRecognizer', function () {
   describe('.prototype', function () {
+    var target, action, testTargetActionPairs, anotherTarget;
+
+    beforeEach(function() {
+      target = { myAction: function () {} };
+      anotherTarget = { myAction: function () {} };
+      action = 'myAction';
+      testTargetActionPairs = [];
+    });
+
     describe('.addTarget(target, action)', function () {
-      var target, action, testTargetActionPairs;
-
-      beforeEach(function() {
-        target = { myAction: function () {} };
-        action = 'myAction';
-        testTargetActionPairs = [];
-      });
-
       it('should store the target-action pair', function () {
-        GestureRecognizer.prototype.addTarget(target, action, testTargetActionPairs);
+        GestureRecognizer.prototype.addTarget(target, action,
+          testTargetActionPairs);
 
         assert(testTargetActionPairs[0][0] === target);
         assert(testTargetActionPairs[0][1] === action);
@@ -24,8 +26,10 @@ describe('GestureRecognizer', function () {
         'when attempting to add a target-action pair that has already been added',
         function () {
           it('should ignore the request', function () {
-            GestureRecognizer.prototype.addTarget(target, action, testTargetActionPairs);
-            GestureRecognizer.prototype.addTarget(target, action, testTargetActionPairs);
+            GestureRecognizer.prototype.addTarget(target, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.addTarget(target, action,
+              testTargetActionPairs);
 
             assert(testTargetActionPairs.length === 1);
           });
@@ -86,6 +90,67 @@ describe('GestureRecognizer', function () {
             assert(errorMessage === 'The specified action must be a function of the target');
           }
         });
+      });
+    });
+
+    describe('.removeTarget(target, action)', function () {
+      it('should remove the specified target-action pair', function () {
+        GestureRecognizer.prototype.addTarget(target, action,
+          testTargetActionPairs);
+        GestureRecognizer.prototype.removeTarget(target, action,
+          testTargetActionPairs);
+
+        assert(testTargetActionPairs.length === 0);
+      });
+
+      describe('when `target` and `action` are null', function () {
+        it(
+          'should remove all target-action pairs',
+          function () {
+            GestureRecognizer.prototype.addTarget(target, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.addTarget(anotherTarget, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.removeTarget(null, null,
+              testTargetActionPairs);
+
+            assert(testTargetActionPairs.length === 0);
+          }
+        );
+      });
+
+      describe('when `target` is null', function () {
+        it(
+          'should remove any target-action pairs with the associated `action`',
+          function () {
+            GestureRecognizer.prototype.addTarget(target, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.addTarget(anotherTarget, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.removeTarget(null, action,
+              testTargetActionPairs);
+
+            assert(testTargetActionPairs.length === 0);
+          }
+        );
+      });
+
+      describe('when `action` is null', function () {
+        it(
+          'should remove any target-action pairs with the associated `target`',
+          function () {
+            target.anotherAction = function () {};
+
+            GestureRecognizer.prototype.addTarget(target, action,
+              testTargetActionPairs);
+            GestureRecognizer.prototype.addTarget(target, 'anotherAction',
+              testTargetActionPairs);
+            GestureRecognizer.prototype.removeTarget(target, null,
+              testTargetActionPairs);
+
+            assert(testTargetActionPairs.length === 0);
+          }
+        );
       });
     });
   });
