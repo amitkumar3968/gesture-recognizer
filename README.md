@@ -622,6 +622,60 @@ any point in its handling of the touch objects the gesture recognizer determines
 that the multi-touch event sequence is not its gesture, it should set it state
 to `GestureRecognizerStateCancelled`.
 
+## Constants
+
+### `GestureRecognizerState`
+
+The current state a gesture recognizer is in.
+
+#### `GestureRecognizerStatePossible`
+
+The gesture recognizer has not yet recognized its gesture, but may be evaluating
+touch events. This is the default state.
+
+#### `GestureRecognizerStateBegan`
+
+The gesture recognizer has received touch objects recognized as a continuous
+gesture. It sends its action message (or messages) at the next cycle of the run
+loop.
+
+#### `GestureRecognizerStateChanged`
+
+The gesture recognizer has received touches recognized as a change to a
+continuous gesture. It sends its action message (or messages) at the next cycle
+of the run loop.
+
+#### `GestureRecognizerStateEnded`
+
+The gesture recognizer has received touches recognized as the end of a
+continuous gesture. It sends its action message (or messages) at the next cycle
+of the run loop and resets its state to `GestureRecognizerStatePossible`.
+
+#### `GestureRecognizerStateCancelled`
+
+The gesture recognizer has received touches resulting in the cancellation of a
+continuous gesture. It sends its action message (or messages) at the next cycle
+of the run loop and resets its state to `GestureRecognizerStatePossible`.
+
+#### `GestureRecognizerStateFailed`
+
+The gesture recognizer has received a multi-touch sequence that it cannot
+recognize as its gesture. No action message is sent and the gesture recognizer
+is reset to `GestureRecognizerStatePossible`.
+
+#### `GestureRecognizerStateRecognized`
+
+The gesture recognizer has received a multi-touch sequence that it recognizes as
+its gesture. It sends its action message (or messages) at the next cycle of the
+run loop and resets its state to `GestureRecognizerStatePossible`.
+
+### Discussion
+
+Gesture recognizers recognize a discrete event such as a tap or a swipe but
+don’t report changes within the gesture. In other words, discrete gestures don’t
+transition through the Began and Changed states and they can’t fail or be
+cancelled.
+
 ## License
 
 MIT
