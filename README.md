@@ -54,7 +54,8 @@ component install multi-touch/gesture-recognizer
 
 ### Initializing a Gesture Recognizer
 
-* [`initWithTarget`](#initwithtarget)
+Initializing a gesture recognizer is done through the native JavaScript object
+instantiation process; the `new` operator.
 
 ### Adding and Removing Targets and Actions
 
