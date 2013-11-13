@@ -524,6 +524,104 @@ any point in its handling of the touch objects the gesture recognizer determines
 that the multi-touch event sequence is not its gesture, it should set it state
 to `GestureRecognizerStateCancelled`.
 
+### `touchesCancelled`
+
+Sent to the receiver when a system event cancels a touch event.
+
+`touchesCancelled(touchList, event)`
+
+#### Arguments
+
+##### `touchList`
+
+A `TouchList` object, containing `Touch` instances in the event represented by
+`event` that represent the touches in the `TouchPhaseCancelled` phase.
+
+##### `event`
+
+A `TouchEvent` object representing the event which the touches belong to.
+
+#### Discussion
+
+Through this function a gesture recognizer receives touch objects (in their
+`TouchPhaseCancelled` phase) before the view attached to the gesture recognizer
+receives them. UIGestureRecognizer objects are not in the responder chain, yet
+observe touches hit-tested to their view. After observation, the delivery of
+touch objects to the attached view, or their disposition otherwise, is affected
+by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
+properties.
+
+Upon receiving this message, the gesture recognizer for a continuous gesture
+should set its state to `GestureRecognizerStateCancelled`; a gesture recognizer
+for a discrete gesture should set its state to `GestureRecognizerStateFailed`.
+
+### `touchesEnded`
+
+Sent to the receiver when one or more fingers lift from the associated view.
+
+`touchesEnded(touchList, event)`
+
+#### Arguments
+
+##### `touchList`
+
+A `TouchList` object, containing `Touch` instances in the event represented by
+`event` that represent the touches in the `TouchPhaseEnded` phase.
+
+##### `event`
+
+A `TouchEvent` object representing the event which the touches belong to.
+
+#### Discussion
+
+Through this function a gesture recognizer receives touch objects (in their
+`TouchPhaseEnded` phase) before the view attached to the gesture recognizer
+receives them. `GestureRecognizer` objects are not in the responder chain, yet
+observe touches hit-tested to their view. After observation, the delivery of
+touch objects to the attached view, or their disposition otherwise, is affected
+by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
+properties.
+
+If the gesture recognizer is interpreting a continuous gesture, it should set
+its state to `GestureRecognizerStateEnded` upon receiving this message. If it is
+interpreting a discrete gesture, it should set its state to
+`GestureRecognizerStateRecognized`. If at any point in its handling of the touch
+objects the gesture recognizer determines that the multi-touch event sequence is
+not its gesture, it should set it state to `GestureRecognizerStateCancelled`.
+
+### touchesMoved
+
+Sent to the receiver when one or more fingers move in the associated view.
+
+`touchesMoved(touchList, event)`
+
+#### Arguments
+
+##### `touchList`
+
+A `TouchList` object, containing `Touch` instances in the event represented by
+`event` that represent the touches in the `TouchPhaseMoved` phase.
+
+##### `event`
+
+A `TouchEvent` object representing the event which the touches belong to.
+
+#### Discussion
+
+Through this function a gesture recognizer receives touch objects (in their
+`TouchPhaseMoved` phase) before the view attached to the gesture recognizer
+receives them. `GestureRecognizer` objects are not in the responder chain, yet
+observe touches hit-tested to their view. After observation, the delivery of
+touch objects to the attached view, or their disposition otherwise, is affected
+by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
+properties.
+
+If the gesture recognizer is interpreting a continuous gesture, it should set
+its state to `GestureRecognizerStateChanged` upon receiving this message. If at
+any point in its handling of the touch objects the gesture recognizer determines
+that the multi-touch event sequence is not its gesture, it should set it state
+to `GestureRecognizerStateCancelled`.
+
 ## License
 
 MIT
