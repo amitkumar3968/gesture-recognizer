@@ -225,6 +225,82 @@ You may call this method multiple times to specify target-action pairs. However,
 if you request to add a target-action pair that has already been added, then the
 request is ignored.
 
+### `canBePreventedByGestureRecognizer`
+
+Overridden to indicate that the specified gesture recognizer can prevent the
+receiver from recognizing a gesture.
+
+`canBePreventedByGestureRecognizer(preventingGestureRecognizer)`
+
+#### Arguments
+
+##### `preventingGestureRecognizer`
+
+An instance of a subclass of `UIGestureRecognizer`.
+
+#### Return Value
+
+`true` to indicate that `preventingGestureRecognizer` can block the receiver
+from recognizing it's gesture, otherwise `false`.
+
+#### Discussion
+
+Overriding these methods enables the same behavior as implementing the
+`GestureRecognizerDelegate` methods `shouldBegin` and `shouldReceiveTouch`.
+However, by overriding them, subclasses can define class-wide prevention rules.
+For example, a `TapGestureRecognizer` object never prevents another
+`TapGestureRecognizer` object with a higher tap count.
+
+### `canPreventGestureRecognizer`
+
+Overridden to indicate that the receiver can prevent the specified gesture
+recognizer from recognizing its gesture.
+
+`canPreventGestureRecognizer(preventedGestureRecognizer)`
+
+#### Arguments
+
+##### `preventedGestureRecognizer`
+
+An instance of a subclass of UIGestureRecognizer.
+
+#### Return Value
+
+`true` to indicate that the receiver can block `preventedGestureRecognizer` from
+recognizing its gesture, otherwise `false`.
+
+#### Discussion
+
+Overriding these methods enables the same behavior as implementing the
+`GestureRecognizerDelegate` methods `shouldBegin` and `shouldReceiveTouch`.
+However, by overriding them, subclasses can define class-wide prevention rules.
+For example, a `TapGestureRecognizer` object never prevents another
+`TapGestureRecognizer` object with a higher tap count.
+
+### `ignoreTouch`
+
+Tells the gesture recognizer to ignore a specific touch of the given event.
+
+`ignoreTouch(touch, event)`
+
+#### Arguments
+
+##### `touch`
+
+A `Touch` object that is part of the current multi-touch sequence and associated
+with `event`.
+
+##### `event`
+
+A `TouchEvent` object that includes a reference to `touch`.
+
+#### Discussion
+
+If a touch isn't part of this gesture you may pass it to this method, causing it
+to be ignored. `GestureRecognizer` does not cancel ignored touches on the
+associated view even if `cancelsTouchesInView` is `true`. This method is
+intended to be called, not overridden.
+
 ## License
 
 MIT
