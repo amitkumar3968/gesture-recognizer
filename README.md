@@ -11,7 +11,13 @@ gesture, it sends an action message to each designated target object.
 The concrete subclasses of `GestureRecognizer` are the following:
 
 * [`TapGestureRecognizer`](https://github.com/multi-touch/tap-gesture-recognizer)
+* [`PinchGestureRecognizer`](https://github.com/multi-touch/pinch-gesture-recognizer)
+* [`RotationGestureRecognizer`](https://github.com/multi-touch/rotation-gesture-recognizer)
+* [`SwipeGestureRecognizer`](https://github.com/multi-touch/swipe-gesture-recognizer)
 * [`PanGestureRecognizer`](https://github.com/multi-touch/pan-gesture-recognizer)
+* [`PanGestureRecognizer`](https://github.com/multi-touch/pan-gesture-recognizer)
+* [`ScreenEdgePanGestureRecognizer`](https://github.com/multi-touch/screen-edge-pan-gesture-recognizer)
+* [`LongPressGestureRecognizer`](https://github.com/multi-touch/long-press-gesture-recognizer)
 
 The `GestureRecognizer` class defines a set of common behaviors that can be
 configured for all concrete gesture recognizers. It can also communicate with
