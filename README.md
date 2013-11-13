@@ -447,6 +447,83 @@ gesture recognition. After this function is called, the runtime ignores all
 remaining touches; that is, the gesture recognizer receives no further updates
 for touches that have begun but haven't ended.
 
+### `shouldBeRequiredToFailByGestureRecognizer`
+
+Overridden to indicate that the receiver should be required to fail by the
+specified gesture recognizer.
+
+`shouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer)`
+
+#### Arguments
+
+##### `otherGestureRecognizer`
+
+An instance of a subclass of `GestureRecognizer`.
+
+#### Return Value
+
+`true` to set up the failure requirement; otherwise, `false`.
+
+#### Discussion
+
+Overriding this method allows a subclass to define a class-wide failure
+requirement.
+
+### `shouldRequireFailureOfGestureRecognizer`
+
+Overriden to indicate that the receiver requires the specified gesture
+recognizer to fail.
+
+`shouldRequireFailureOfGestureRecognizer(otherGestureRecognizer)`
+
+#### Arguments
+
+##### `otherGestureRecognizer`
+
+An instance of a subclass of `GestureRecognizer`.
+
+#### Return Value
+
+`true` to set up the failure requirement; otherwise, `false`.
+
+### Discussion
+
+Overriding this function allows a subclass to define a class-wide failure
+requirement.
+
+### `touchesBegan`
+
+Sent to the receiver when one or more fingers touch down in the associated view.
+
+`touchesBegan(touchList, event)`
+
+#### Arguments
+
+##### `touchList`
+
+A `TouchList` object, containing `Touch` instances in the event represented by
+`event` that represent the touches in the `TouchPhaseBegan` phase.
+
+##### `event`
+
+A `TouchEvent` object representing the event which the touches belong to.
+
+#### Discussion
+
+Through this function a gesture recognizer receives touch objects (in their
+`TouchPhaseBegan` phase) before the view attached to the gesture recognizer
+receives them. `GestureRecognizer` objects are not in the responder chain, yet
+observe touches hit-tested to their view. After observation, the delivery of
+touch objects to the attached view, or their disposition otherwise, is affected
+by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
+properties.
+
+If the gesture recognizer is interpreting a continuous gesture, it should set
+its state to `GestureRecognizerStateBegan` upon receiving this message. If at
+any point in its handling of the touch objects the gesture recognizer determines
+that the multi-touch event sequence is not its gesture, it should set it state
+to `GestureRecognizerStateCancelled`.
+
 ## License
 
 MIT
