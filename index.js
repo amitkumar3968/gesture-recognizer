@@ -6,12 +6,9 @@ module.exports = GestureRecognizer;
 /**
  * Constructor
  */
-function GestureRecognizer() {}
-
-/**
- * Private variables
- */
-var targetActionPairs = [];
+function GestureRecognizer() {
+  this.pairs = [];
+}
 
 /**
  * Prototype
@@ -20,8 +17,8 @@ var prototype = Object.create(null);
 
 GestureRecognizer.prototype = prototype;
 
-prototype.addTarget = function (target, action, testTargetActionPairs) {
-  var pairs = (testTargetActionPairs || targetActionPairs);
+prototype.addTarget = function (target, action, pairs) {
+  pairs = pairs || this.pairs;
 
   if (!target)
     throw new Error("You must specify a target");
@@ -39,8 +36,8 @@ prototype.addTarget = function (target, action, testTargetActionPairs) {
     pairs.push([target, action]);
 };
 
-prototype.removeTarget = function (target, action, testTargetActionPairs) {
-  var pairs = (testTargetActionPairs || targetActionPairs);
+prototype.removeTarget = function (target, action, pairs) {
+  pairs = pairs || this.pairs;
 
   if (target === null && action === null) {
     pairs.length = 0;
