@@ -307,6 +307,147 @@ to be ignored. `GestureRecognizer` does not cancel ignored touches on the
 associated view even if `cancelsTouchesInView` is `true`. This method is
 intended to be called, not overridden.
 
+### `locationInView`
+
+Returns the point computed as the location in a given view of the gesture
+represented by the receiver.
+
+`locationInView(view)`
+
+#### Arguments
+
+##### `view`
+
+A UIView object on which the gesture took place. If no value is specified, it
+defaults to the current window.
+
+#### Return Value
+
+A point in the local coordinate system of view that identifies the location of
+the gesture. If no value is specified for view, the method returns the gesture
+location in the window’s base coordinate system.
+
+#### Discussion
+
+The returned value is a generic single-point location for the gesture.  It is
+usually the centroid of the touches involved in the gesture. For objects of the
+`SwipeGestureRecognizer` and `TapGestureRecognizer` classes, the location
+returned by this method has a significance special to the gesture. This
+significance is documented in the reference for those classes.
+
+### `locationOfTouch`
+
+Returns the location of one of the gesture’s touches in the local coordinate
+system of a given view.
+
+`locationOfTouch(touchIndex, view)`
+
+#### Arguments
+
+##### `touchIndex`
+
+The index of a `Touch` object in a private array maintained by the receiver.
+This touch object represents a touch of the current gesture.
+
+##### `view`
+
+A view object on which the gesture took place. If no value is specified, it
+defaults to the current window.
+
+#### Return Value
+
+A point in the local coordinate system of `view` that identifies the location of
+the touch. If no specified for view, the method returns the touch location
+in the window’s base coordinate system.
+
+### `numberOfTouches`
+
+Returns the number of touches involved in the gesture represented by the
+receiver.
+
+`numberOfTouches()`
+
+
+#### Return Value
+
+The number of `Touch` objects in a private array maintained by the receiver.
+Each of these objects represents a touch in the current gesture.
+
+
+#### Discussion
+
+Using the value returned by this method in a loop, you can ask for the location
+of individual touches using the [`locationOfTouch`] method.
+
+### `removeTarget`
+
+Removes a target and an action from a gesture-recognizer object.
+
+`removeTarget(target, action)`
+
+#### Arguments
+
+##### `target`
+
+An object that currently is a recipient of action messages sent by the receiver
+when the represented gesture occurs. Specify `null` if you want to remove all
+targets from the receiver.
+
+##### `action`
+
+A `String` identifying the name of a function on the `target` object, which is
+to be invoked by the action message.  Specify `null` if you want to remove all
+actions from the receiver.
+
+#### Discussion
+
+Calling this method removes the specified target-action pair. Passing `null` for
+`target` matches all targets and passing `null` for action matches all actions.
+
+### `requireGestureRecognizerToFail`
+
+Creates a dependency relationship between the receiver and another gesture
+recognizer.
+
+`requireGestureRecognizerToFail(otherGestureRecognizer)`
+
+#### Arguments
+
+##### `otherGestureRecognizer`
+
+Another gesture-recognizer object (an instance of a subclass of
+`GestureRecognizer`).
+
+#### Discussion
+
+This method creates a relationship with another gesture recognizer that delays
+the receiver’s transition out of `GestureRecognizerStatePossible`. The state
+that the receiver transitions to depends on what happens with
+`otherGestureRecognizer`.
+
+* If `otherGestureRecognizer` transitions to `GestureRecognizerStateFailed`, the
+  receiver transitions to it's normal next state.
+* If `otherGestureRecognizer` transitions to `GestureRecognizerStateRecognized`
+  or `GestureRecognizerStateBegan`, the receiver transitions to `GestureRecognizerStateFailed`.
+
+An example where this function might be called is when you want a single-tap
+gesture require that a double-tap gesture fail.
+
+### `reset`
+
+Overridden to reset internal state when a gesture is recognized.
+
+`reset()`
+
+#### Discussion
+
+The runtime calls this function after the gesture-recognizer state has been set
+to `GestureRecognizerStateEnded` or `GestureRecognizerStateRecognized`.
+Subclasses should reset any internal state in preparation for a new attempt at
+gesture recognition. After this function is called, the runtime ignores all
+remaining touches; that is, the gesture recognizer receives no further updates
+for touches that have begun but haven't ended.
+
 ## License
 
 MIT
