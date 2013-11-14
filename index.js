@@ -26,8 +26,8 @@ states.RECOGNIZED = states.ENDED;
 
 prototype.state = states.POSSIBLE;
 
-prototype.addTarget = function (target, action, pairs) {
-  pairs = pairs || this.pairs;
+prototype.addTarget = function (target, action) {
+  var pairs = this.pairs;
 
   if (!target)
     throw new Error("You must specify a target");
@@ -45,8 +45,8 @@ prototype.addTarget = function (target, action, pairs) {
     pairs.push([target, action]);
 };
 
-prototype.removeTarget = function (target, action, pairs) {
-  pairs = pairs || this.pairs;
+prototype.removeTarget = function (target, action) {
+  var pairs = this.pairs;
 
   if (target === null && action === null) {
     pairs.length = 0;
