@@ -13,9 +13,18 @@ function GestureRecognizer() {
 /**
  * Prototype
  */
-var prototype = Object.create(null);
+var prototype = GestureRecognizer.prototype = Object.create(null);
+var states = prototype.states = Object.create(null);
 
-GestureRecognizer.prototype = prototype;
+states.POSSIBLE = 'possible';
+states.BEGAN = 'began';
+states.CHANGED = 'changed';
+states.ENDED = 'ended';
+states.CANCELLED = 'cancelled';
+states.FAILED = 'failed';
+states.RECOGNIZED = states.ENDED;
+
+prototype.state = states.POSSIBLE;
 
 prototype.addTarget = function (target, action, pairs) {
   pairs = pairs || this.pairs;

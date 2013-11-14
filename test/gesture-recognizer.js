@@ -4,19 +4,70 @@ var gestureRecognizer = new GestureRecognizer(document);
 
 describe('GestureRecognizer', function () {
   describe('.prototype', function () {
-    var target, action, testTargetActionPairs, anotherTarget;
+    var target, action, testTargetActionPairs, anotherTarget, prototype;
 
     beforeEach(function() {
       target = { myAction: function () {} };
       anotherTarget = { myAction: function () {} };
       action = 'myAction';
       testTargetActionPairs = [];
+      prototype = GestureRecognizer.prototype;
+    });
+
+    describe('.states', function () {
+      describe('.POSSIBLE', function () {
+        it('should evaluate to `possible`', function () {
+          assert(prototype.states.POSSIBLE === 'possible');
+        });
+      });
+
+      describe('.BEGAN', function () {
+        it('should evaluate to `began`', function () {
+          assert(prototype.states.BEGAN === 'began');
+        });
+      });
+
+      describe('.CHANGED', function () {
+        it('should evaluate to `changed`', function () {
+          assert(prototype.states.CHANGED === 'changed');
+        });
+      });
+
+      describe('.ENDED', function () {
+        it('should evaluate to `ended`', function () {
+          assert(prototype.states.ENDED === 'ended');
+        });
+      });
+
+      describe('.CANCELLED', function () {
+        it('should evaluate to `cancelled`', function () {
+          assert(prototype.states.CANCELLED === 'cancelled');
+        });
+      });
+
+      describe('.FAILED', function () {
+        it('should evaluate to `failed`', function () {
+          assert(prototype.states.FAILED === 'failed');
+        });
+      });
+
+      describe('.RECOGNIZED', function () {
+        it('should evaluate to `ended`', function () {
+          assert(prototype.states.RECOGNIZED === 'ended');
+        });
+      });
+    });
+
+    describe('.state', function () {
+      it('should default to `possible`', function () {
+        console.log(prototype.state);
+        assert(prototype.state === prototype.states.POSSIBLE);
+      });
     });
 
     describe('.addTarget(target, action)', function () {
       it('should store the target-action pair', function () {
-        GestureRecognizer.prototype.addTarget(target, action,
-          testTargetActionPairs);
+        prototype.addTarget(target, action, testTargetActionPairs);
 
         assert(testTargetActionPairs[0][0] === target);
         assert(testTargetActionPairs[0][1] === action);
@@ -26,10 +77,8 @@ describe('GestureRecognizer', function () {
         'when attempting to add a target-action pair that has already been added',
         function () {
           it('should ignore the request', function () {
-            GestureRecognizer.prototype.addTarget(target, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.addTarget(target, action,
-              testTargetActionPairs);
+            prototype.addTarget(target, action, testTargetActionPairs);
+            prototype.addTarget(target, action, testTargetActionPairs);
 
             assert(testTargetActionPairs.length === 1);
           });
@@ -41,7 +90,7 @@ describe('GestureRecognizer', function () {
           var errorMessage;
 
           try {
-            GestureRecognizer.prototype.addTarget();
+            prototype.addTarget();
           } catch (error) {
             errorMessage = error.message;
           } finally {
@@ -55,7 +104,7 @@ describe('GestureRecognizer', function () {
           var errorMessage;
 
           try {
-            GestureRecognizer.prototype.addTarget({});
+            prototype.addTarget({});
           } catch (error) {
             errorMessage = error.message;
           } finally {
@@ -69,7 +118,7 @@ describe('GestureRecognizer', function () {
           var errorMessage;
 
           try {
-            GestureRecognizer.prototype.addTarget({}, {});
+            prototype.addTarget({}, {});
           } catch (error) {
             errorMessage = error.message;
           } finally {
@@ -83,7 +132,7 @@ describe('GestureRecognizer', function () {
           var errorMessage;
 
           try {
-            GestureRecognizer.prototype.addTarget({}, 'foo');
+            prototype.addTarget({}, 'foo');
           } catch (error) {
             errorMessage = error.message;
           } finally {
@@ -95,40 +144,29 @@ describe('GestureRecognizer', function () {
 
     describe('.removeTarget(target, action)', function () {
       it('should remove the specified target-action pair', function () {
-        GestureRecognizer.prototype.addTarget(target, action,
-          testTargetActionPairs);
-        GestureRecognizer.prototype.removeTarget(target, action,
-          testTargetActionPairs);
+        prototype.addTarget(target, action, testTargetActionPairs);
+        prototype.removeTarget(target, action, testTargetActionPairs);
 
         assert(testTargetActionPairs.length === 0);
       });
 
       describe('when `target` and `action` are null', function () {
-        it(
-          'should remove all target-action pairs',
-          function () {
-            GestureRecognizer.prototype.addTarget(target, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.addTarget(anotherTarget, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.removeTarget(null, null,
-              testTargetActionPairs);
+        it('should remove all target-action pairs', function () {
+          prototype.addTarget(target, action, testTargetActionPairs);
+          prototype.addTarget(anotherTarget, action, testTargetActionPairs);
+          prototype.removeTarget(null, null, testTargetActionPairs);
 
-            assert(testTargetActionPairs.length === 0);
-          }
-        );
+          assert(testTargetActionPairs.length === 0);
+        });
       });
 
       describe('when `target` is null', function () {
         it(
           'should remove any target-action pairs with the associated `action`',
           function () {
-            GestureRecognizer.prototype.addTarget(target, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.addTarget(anotherTarget, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.removeTarget(null, action,
-              testTargetActionPairs);
+            prototype.addTarget(target, action, testTargetActionPairs);
+            prototype.addTarget(anotherTarget, action, testTargetActionPairs);
+            prototype.removeTarget(null, action, testTargetActionPairs);
 
             assert(testTargetActionPairs.length === 0);
           }
@@ -141,12 +179,9 @@ describe('GestureRecognizer', function () {
           function () {
             target.anotherAction = function () {};
 
-            GestureRecognizer.prototype.addTarget(target, action,
-              testTargetActionPairs);
-            GestureRecognizer.prototype.addTarget(target, 'anotherAction',
-              testTargetActionPairs);
-            GestureRecognizer.prototype.removeTarget(target, null,
-              testTargetActionPairs);
+            prototype.addTarget(target, action, testTargetActionPairs);
+            prototype.addTarget(target, 'anotherAction', testTargetActionPairs);
+            prototype.removeTarget(target, null, testTargetActionPairs);
 
             assert(testTargetActionPairs.length === 0);
           }
