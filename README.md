@@ -187,12 +187,12 @@ The possible states a gesture recognizer can be in are represented by the
 `states` property on the `GestureRecognizer` prototype. Some of these states are
 not applicable to discrete gestures.
 
-Recognizers for discrete gestures transition from `POSSIBLE` to `FAILED` or
-`RECOGNIZED`. Recognizers for continuous gesture transition from `POSSIBLE` to
-these phases in the given order: `BEGAN`, `CHANGED`, and `ENDED`. If, however,
-they receive a cancellation touch, they should transition to `CANCELLED`. If
-recognizers for continuous gestures can’t interpret a multi-touch sequence as
-their gesture, they transition to `FAILED`.
+Recognizers for discrete gestures transition from [`POSSIBLE`] to [`FAILED`] or
+[`RECOGNIZED`]. Recognizers for continuous gesture transition from [`POSSIBLE`]
+to these phases in the given order: [`BEGAN`], [`CHANGED`], and [`ENDED`]. If,
+however, they receive a cancellation touch, they should transition to
+[`CANCELLED`]. If recognizers for continuous gestures can’t interpret a
+multi-touch sequence as their gesture, they transition to [`FAILED`].
 
 ### `view`
 
@@ -418,13 +418,13 @@ Another gesture-recognizer object (an instance of a subclass of
 #### Discussion
 
 This method creates a relationship with another gesture recognizer that delays
-the receiver’s transition out of `POSSIBLE`. The state that the receiver
+the receiver’s transition out of [`POSSIBLE`]. The state that the receiver
 transitions to depends on what happens with `otherGestureRecognizer`.
 
 * If `otherGestureRecognizer` transitions to `FAILED`, the receiver transitions
   to it's normal next state.
-* If `otherGestureRecognizer` transitions to `RECOGNIZED` or `BEGAN`, the
-  receiver transitions to `FAILED`.
+* If `otherGestureRecognizer` transitions to [`RECOGNIZED]` or [`BEGAN`], the
+  receiver transitions to [`FAILED`].
 
 An example where this function might be called is when you want a single-tap
 gesture require that a double-tap gesture fail.
@@ -438,7 +438,7 @@ Overridden to reset internal state when a gesture is recognized.
 #### Discussion
 
 The runtime calls this function after the gesture-recognizer state has been set
-to `ENDED` or `RECOGNIZED`.  Subclasses should reset any internal state in
+to [`ENDED`] or [`RECOGNIZED`].  Subclasses should reset any internal state in
 preparation for a new attempt at gesture recognition. After this function is
 called, the runtime ignores all remaining touches; that is, the gesture
 recognizer receives no further updates for touches that have begun but haven't
@@ -516,10 +516,10 @@ by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
 [`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `BEGAN` upon receiving this message. If at any point in its
+its state to [`BEGAN`] upon receiving this message. If at any point in its
 handling of the touch objects the gesture recognizer determines that the
 multi-touch event sequence is not its gesture, it should set it state to
-`CANCELLED`.
+[`CANCELLED`].
 
 ### `touchesCancelled`
 
@@ -549,8 +549,8 @@ by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
 [`delaysTouchesEnded`] properties.
 
 Upon receiving this message, the gesture recognizer for a continuous gesture
-should set its state to `CANCELLED`; a gesture recognizer for a discrete gesture
-should set its state to `FAILED`.
+should set its state to [`CANCELLED`]; a gesture recognizer for a discrete gesture
+should set its state to [`FAILED`].
 
 ### `touchesEnded`
 
@@ -580,11 +580,11 @@ by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
 [`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `ENDED` upon receiving this message. If it is interpreting a
-discrete gesture, it should set its state to `RECOGNIZED`.
+its state to [`ENDED`] upon receiving this message. If it is interpreting a
+discrete gesture, it should set its state to [`RECOGNIZED`].
 If at any point in its handling of the touch objects the gesture recognizer
 determines that the multi-touch event sequence is not its gesture, it should set
-it state to `CANCELLED`.
+it state to [`CANCELLED`].
 
 ### touchesMoved
 
@@ -614,7 +614,7 @@ by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
 [`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `CHANGED` upon receiving this message. If at any point in its
+its state to [`CHANGED`] upon receiving this message. If at any point in its
 handling of the touch objects the gesture recognizer determines that the
 multi-touch event sequence is not its gesture, it should set it state to
 `CANCELLED`.
@@ -708,3 +708,10 @@ Apple
 [`canBePreventedByGestureRecognizer`]: #canbepreventedbygesturerecognizer
 [`shouldRequireFailureOfGestureRecognizer`]: #shouldrequirefailureofgesturerecognizer
 [`shouldBeRequiredToFailByGestureRecognizer`]: #shouldberequiredtofailbygesturerecognizer
+[`POSSIBLE`]: #possible
+[`BEGAN`]: #began
+[`CHANGED`]: #changed
+[`ENDED`]: #ended
+[`CANCELLED`]: #cancelled
+[`FAILED`]: #failed
+[`RECOGNIZED`]: #recognized
