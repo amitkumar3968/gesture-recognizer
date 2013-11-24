@@ -76,7 +76,7 @@ instantiation process; the `new` operator.
 
 ### Canceling and Delaying Touches
 
-* [`cancelsTouchesInView`](#cancelstouchesinview) *property*
+* [`cancelsTouchesInView`] *property*
 * [`delaysTouchesBegan`](#delaystouchesbegan) *property*
 * [`delaysTouchesEnded`](#delaystouchesended) *property*
 
@@ -684,3 +684,5 @@ MIT
 ## Credits
 
 Apple
+
+[cancelsTouchesInView]: #cancelsTouchesInView
