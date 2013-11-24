@@ -10,13 +10,13 @@ gesture, it sends an action message to each designated target object.
 
 The concrete subclasses of `GestureRecognizer` are the following:
 
-* [`TapGestureRecognizer`](https://github.com/multi-touch/tap-gesture-recognizer)
-* [`PinchGestureRecognizer`](https://github.com/multi-touch/pinch-gesture-recognizer)
-* [`RotationGestureRecognizer`](https://github.com/multi-touch/rotation-gesture-recognizer)
-* [`SwipeGestureRecognizer`](https://github.com/multi-touch/swipe-gesture-recognizer)
-* [`PanGestureRecognizer`](https://github.com/multi-touch/pan-gesture-recognizer)
-* [`ScreenEdgePanGestureRecognizer`](https://github.com/multi-touch/screen-edge-pan-gesture-recognizer)
-* [`LongPressGestureRecognizer`](https://github.com/multi-touch/long-press-gesture-recognizer)
+* [`TapGestureRecognizer`]
+* [`PinchGestureRecognizer`]
+* [`RotationGestureRecognizer`]
+* [`SwipeGestureRecognizer`]
+* [`PanGestureRecognizer`]
+* [`ScreenEdgePanGestureRecognizer`]
+* [`LongPressGestureRecognizer`]
 
 The `GestureRecognizer` class defines a set of common behaviors that can be
 configured for all concrete gesture recognizers. It can also communicate with
@@ -59,34 +59,34 @@ instantiation process; the `new` operator.
 
 ### Adding and Removing Targets and Actions
 
-* [`addTarget`](#addtarget)
-* [`removeTarget`](#removetarget)
+* [`addTarget`]
+* [`removeTarget`]
 
 ### Getting the Touches and Location of a Gesture
 
-* [`locationInView`](#addtarget)
-* [`locationOfTouch`](#locationoftouch)
-* [`numberOfTouches`](#numberoftouches)
+* [`locationInView`]
+* [`locationOfTouch`]
+* [`numberOfTouches`]
 
 ### Getting the Recognizer's State and View
 
-* [`state`](#state) *property*
-* [`view`](#view) *property*
-* [`enabled`](#enabled) *property*
+* [`state`] *property*
+* [`view`] *property*
+* [`enabled`] *property*
 
 ### Canceling and Delaying Touches
 
 * [`cancelsTouchesInView`] *property*
-* [`delaysTouchesBegan`](#delaystouchesbegan) *property*
-* [`delaysTouchesEnded`](#delaystouchesended) *property*
+* [`delaysTouchesBegan`] *property*
+* [`delaysTouchesEnded`] *property*
 
 ### Specifying Dependencies Between Gesture Recognizers
 
-* [`requireGestureRecognizerToFail`](#requiregesturerecognizertofail)
+* [`requireGestureRecognizerToFail`]
 
 ### Setting and Getting the Delegate
 
-* [`delegate`](#delegate) *property*
+* [`delegate`] *property*
 
 ### Methods for Subclasses
 
@@ -94,15 +94,15 @@ Below is a list of methods intended to be called or overriden *only* by
 subclasses of a `GestureRecognizer`. Clients that merely use concrete subclasses
 of `GestureRecognizer` must never call these methods.
 
-* [`touchesBegan`](#touchesbegan)
-* [`touchesMoved`](#touchesmoved)
-* [`touchesEnded`](#touchesended)
-* [`touchesCancelled`](#touchescancelled)
-* [`reset`](#reset)
-* [`ignoreTouch`](#ignoretouch)
-* [`canBePreventedByGestureRecognizer`](#canbepreventedbygesturerecognizer)
-* [`shouldRequireFailureOfGestureRecognizer`](#shouldrequirefailureofgesturerecognizer)
-* [`shouldBeRequiredToFailByGestureRecognizer`](#shouldberequiredtofailbygesturerecognizer)
+* [`touchesBegan`]
+* [`touchesMoved`]
+* [`touchesEnded`]
+* [`touchesCancelled`]
+* [`reset`]
+* [`ignoreTouch`]
+* [`canBePreventedByGestureRecognizer`]
+* [`shouldRequireFailureOfGestureRecognizer`]
+* [`shouldBeRequiredToFailByGestureRecognizer`]
 
 ## Properties
 
@@ -115,10 +115,10 @@ is recognized.
 
 When this property is `true` (the default) and the receiver recognizes its
 gesture, the touches of that gesture are pending are not delivered to the view
-and previously delivered touches are cancelled through a
-[`touchesCancelled`](#touchescancelled) message sent to the view. If a gesture
-recognizer doesn't recognize its gesture or if the value of this property is
-`false`, the view receives all the touches in the multi-touch sequence.
+and previously delivered touches are cancelled through a [`touchesCancelled`]
+message sent to the view. If a gesture recognizer doesn't recognize its gesture
+or if the value of this property is `false`, the view receives all the touches
+in the multi-touch sequence.
 
 ### `delaysTouchesBegan`
 
@@ -133,11 +133,11 @@ When the value of the property is `true`, the window suspends delivery of touch
 objects in the `TouchPhaseBegan` phase to the view. If the gesture recognizer
 subsequently recognizes its gesture, these touch objects are discarded. If the
 gesture recognizer, however, does not recognize its gesture, the window delivers
-these objects to the view in a [`touchesBegan`](#touchesbegan) message (and
-possibly a follow-up [`touchesMoved`](#touchesmoved) message to inform it of the
-touches’ current locations). Set this property to `true` to prevent views from
-processing any touches in the `TouchPhaseBegan` phase that may be recognized as
-part of this gesture.
+these objects to the view in a [`touchesBegan`] message (and possibly a
+follow-up [`touchesMoved`] message to inform it of the touches’ current
+locations). Set this property to `true` to prevent views from processing any
+touches in the `TouchPhaseBegan` phase that may be recognized as part of this
+gesture.
 
 ### `delaysTouchesEnded`
 
@@ -150,11 +150,11 @@ When the value of this property is `true` (the default) and the receiver is
 analyzing touch events, the window suspends delivery of touch objects in the
 `TouchPhaseEnded` phase to the attached view. If the gesture recognizer
 subsequently recognizes its gesture, these touch objects are cancelled (via a
-[`touchesCancelled`](#touchescancelled) message). If the gesture recognizer does
-not recognize its gesture, the window delivers these objects in an invocation of
-the view’s [`touchesEnded`](#touchesended) method. Set this property to `false`
-to have touch objects in the `TouchPhaseEnded` delivered to the view while the
-gesture recognizer is analyzing the same touches.
+[`touchesCancelled`] message). If the gesture recognizer does not recognize its
+gesture, the window delivers these objects in an invocation of the view’s
+[`touchesEnded`] method. Set this property to `false` to have touch objects in
+the `TouchPhaseEnded` delivered to the view while the gesture recognizer is
+analyzing the same touches.
 
 ### `delegate`
 
@@ -184,18 +184,15 @@ The current state of the gesture recognizer.
 #### Discussion
 
 The possible states a gesture recognizer can be in are represented by the
-constants of type `GestureRecognizerState`. Some of these states are not
-applicable to discrete gestures.
+`states` property on the `GestureRecognizer` prototype. Some of these states are
+not applicable to discrete gestures.
 
-Recognizers for discrete gestures transition from
-`GestureRecognizerStatePossible` to `GestureRecognizerStateFailed` or
-`GestureRecognizerStateRecognized`. Recognizers for continuous gesture
-transition from `GestureRecognizerStatePossible` to these phases in the given
-order: `GestureRecognizerStateBegan`, `GestureRecognizerStateChanged`, and
-`GestureRecognizerStateEnded`. If, however, they receive a cancellation touch,
-they should transition to `GestureRecognizerStateCancelled`. If recognizers for
-continuous gestures can’t interpret a multi-touch sequence as their gesture,
-they transition to `GestureRecognizerStateFailed`.
+Recognizers for discrete gestures transition from `POSSIBLE` to `FAILED` or
+`RECOGNIZED`. Recognizers for continuous gesture transition from `POSSIBLE` to
+these phases in the given order: `BEGAN`, `CHANGED`, and `ENDED`. If, however,
+they receive a cancellation touch, they should transition to `CANCELLED`. If
+recognizers for continuous gestures can’t interpret a multi-touch sequence as
+their gesture, they transition to `FAILED`.
 
 ### `view`
 
@@ -254,8 +251,8 @@ from recognizing it's gesture, otherwise `false`.
 Overriding these methods enables the same behavior as implementing the
 `GestureRecognizerDelegate` methods `shouldBegin` and `shouldReceiveTouch`.
 However, by overriding them, subclasses can define class-wide prevention rules.
-For example, a `TapGestureRecognizer` object never prevents another
-`TapGestureRecognizer` object with a higher tap count.
+For example, a [`TapGestureRecognizer`] object never prevents another
+[`TapGestureRecognizer`] object with a higher tap count.
 
 ### `canPreventGestureRecognizer`
 
@@ -421,14 +418,13 @@ Another gesture-recognizer object (an instance of a subclass of
 #### Discussion
 
 This method creates a relationship with another gesture recognizer that delays
-the receiver’s transition out of `GestureRecognizerStatePossible`. The state
-that the receiver transitions to depends on what happens with
-`otherGestureRecognizer`.
+the receiver’s transition out of `POSSIBLE`. The state that the receiver
+transitions to depends on what happens with `otherGestureRecognizer`.
 
-* If `otherGestureRecognizer` transitions to `GestureRecognizerStateFailed`, the
-  receiver transitions to it's normal next state.
-* If `otherGestureRecognizer` transitions to `GestureRecognizerStateRecognized`
-  or `GestureRecognizerStateBegan`, the receiver transitions to `GestureRecognizerStateFailed`.
+* If `otherGestureRecognizer` transitions to `FAILED`, the receiver transitions
+  to it's normal next state.
+* If `otherGestureRecognizer` transitions to `RECOGNIZED` or `BEGAN`, the
+  receiver transitions to `FAILED`.
 
 An example where this function might be called is when you want a single-tap
 gesture require that a double-tap gesture fail.
@@ -442,11 +438,11 @@ Overridden to reset internal state when a gesture is recognized.
 #### Discussion
 
 The runtime calls this function after the gesture-recognizer state has been set
-to `GestureRecognizerStateEnded` or `GestureRecognizerStateRecognized`.
-Subclasses should reset any internal state in preparation for a new attempt at
-gesture recognition. After this function is called, the runtime ignores all
-remaining touches; that is, the gesture recognizer receives no further updates
-for touches that have begun but haven't ended.
+to `ENDED` or `RECOGNIZED`.  Subclasses should reset any internal state in
+preparation for a new attempt at gesture recognition. After this function is
+called, the runtime ignores all remaining touches; that is, the gesture
+recognizer receives no further updates for touches that have begun but haven't
+ended.
 
 ### `shouldBeRequiredToFailByGestureRecognizer`
 
@@ -516,14 +512,14 @@ Through this function a gesture recognizer receives touch objects (in their
 receives them. `GestureRecognizer` objects are not in the responder chain, yet
 observe touches hit-tested to their view. After observation, the delivery of
 touch objects to the attached view, or their disposition otherwise, is affected
-by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
-properties.
+by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
+[`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `GestureRecognizerStateBegan` upon receiving this message. If at
-any point in its handling of the touch objects the gesture recognizer determines
-that the multi-touch event sequence is not its gesture, it should set it state
-to `GestureRecognizerStateCancelled`.
+its state to `BEGAN` upon receiving this message. If at any point in its
+handling of the touch objects the gesture recognizer determines that the
+multi-touch event sequence is not its gesture, it should set it state to
+`CANCELLED`.
 
 ### `touchesCancelled`
 
@@ -546,15 +542,15 @@ A `TouchEvent` object representing the event which the touches belong to.
 
 Through this function a gesture recognizer receives touch objects (in their
 `TouchPhaseCancelled` phase) before the view attached to the gesture recognizer
-receives them. UIGestureRecognizer objects are not in the responder chain, yet
+receives them. `GestureRecognizer` objects are not in the responder chain, yet
 observe touches hit-tested to their view. After observation, the delivery of
 touch objects to the attached view, or their disposition otherwise, is affected
-by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
-properties.
+by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
+[`delaysTouchesEnded`] properties.
 
 Upon receiving this message, the gesture recognizer for a continuous gesture
-should set its state to `GestureRecognizerStateCancelled`; a gesture recognizer
-for a discrete gesture should set its state to `GestureRecognizerStateFailed`.
+should set its state to `CANCELLED`; a gesture recognizer for a discrete gesture
+should set its state to `FAILED`.
 
 ### `touchesEnded`
 
@@ -580,15 +576,15 @@ Through this function a gesture recognizer receives touch objects (in their
 receives them. `GestureRecognizer` objects are not in the responder chain, yet
 observe touches hit-tested to their view. After observation, the delivery of
 touch objects to the attached view, or their disposition otherwise, is affected
-by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
-properties.
+by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
+[`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `GestureRecognizerStateEnded` upon receiving this message. If it is
-interpreting a discrete gesture, it should set its state to
-`GestureRecognizerStateRecognized`. If at any point in its handling of the touch
-objects the gesture recognizer determines that the multi-touch event sequence is
-not its gesture, it should set it state to `GestureRecognizerStateCancelled`.
+its state to `ENDED` upon receiving this message. If it is interpreting a
+discrete gesture, it should set its state to `RECOGNIZED`.
+If at any point in its handling of the touch objects the gesture recognizer
+determines that the multi-touch event sequence is not its gesture, it should set
+it state to `CANCELLED`.
 
 ### touchesMoved
 
@@ -614,67 +610,65 @@ Through this function a gesture recognizer receives touch objects (in their
 receives them. `GestureRecognizer` objects are not in the responder chain, yet
 observe touches hit-tested to their view. After observation, the delivery of
 touch objects to the attached view, or their disposition otherwise, is affected
-by the `cancelsTouchesInView`, `delaysTouchesBegan`, and `delaysTouchesEnded`
-properties.
+by the [`cancelsTouchesInView`], [`delaysTouchesBegan`], and
+[`delaysTouchesEnded`] properties.
 
 If the gesture recognizer is interpreting a continuous gesture, it should set
-its state to `GestureRecognizerStateChanged` upon receiving this message. If at
-any point in its handling of the touch objects the gesture recognizer determines
-that the multi-touch event sequence is not its gesture, it should set it state
-to `GestureRecognizerStateCancelled`.
+its state to `CHANGED` upon receiving this message. If at any point in its
+handling of the touch objects the gesture recognizer determines that the
+multi-touch event sequence is not its gesture, it should set it state to
+`CANCELLED`.
 
 ## Constants
 
-### `GestureRecognizerState`
-
 The current state a gesture recognizer is in.
 
-#### `GestureRecognizerStatePossible`
+#### `POSSIBLE`
 
 The gesture recognizer has not yet recognized its gesture, but may be evaluating
 touch events. This is the default state.
 
-#### `GestureRecognizerStateBegan`
+#### `BEGAN`
 
 The gesture recognizer has received touch objects recognized as a continuous
 gesture. It sends its action message (or messages) at the next cycle of the run
 loop.
 
-#### `GestureRecognizerStateChanged`
+#### `CHANGED`
 
 The gesture recognizer has received touches recognized as a change to a
 continuous gesture. It sends its action message (or messages) at the next cycle
 of the run loop.
 
-#### `GestureRecognizerStateEnded`
+#### `ENDED`
 
 The gesture recognizer has received touches recognized as the end of a
 continuous gesture. It sends its action message (or messages) at the next cycle
-of the run loop and resets its state to `GestureRecognizerStatePossible`.
+of the run loop and resets its state to [`POSSIBLE`].
 
-#### `GestureRecognizerStateCancelled`
+#### `CANCELLED`
 
 The gesture recognizer has received touches resulting in the cancellation of a
 continuous gesture. It sends its action message (or messages) at the next cycle
-of the run loop and resets its state to `GestureRecognizerStatePossible`.
+of the run loop and resets its state to [`POSSIBLE`].
 
-#### `GestureRecognizerStateFailed`
+#### `FAILED`
 
 The gesture recognizer has received a multi-touch sequence that it cannot
 recognize as its gesture. No action message is sent and the gesture recognizer
-is reset to `GestureRecognizerStatePossible`.
+is reset to [`POSSIBLE`].
 
-#### `GestureRecognizerStateRecognized`
+#### `RECOGNIZED`
 
 The gesture recognizer has received a multi-touch sequence that it recognizes as
 its gesture. It sends its action message (or messages) at the next cycle of the
-run loop and resets its state to `GestureRecognizerStatePossible`.
+run loop and resets its state to [`POSSIBLE`].
 
 ### Discussion
 
 Gesture recognizers recognize a discrete event such as a tap or a swipe but
 don’t report changes within the gesture. In other words, discrete gestures don’t
-transition through the Began and Changed states and they can’t fail or be
+transition through the [`BEGAN`] and [`CHANGED`] states and they can’t fail or be
 cancelled.
 
 ## License
@@ -685,4 +679,32 @@ MIT
 
 Apple
 
-[cancelsTouchesInView]: #cancelsTouchesInView
+[`cancelsTouchesInView`]: #cancelstouchesinview
+[`TapGestureRecognizer`]: https://github.com/multi-touch/tap-gesture-recognizer
+[`PinchGestureRecognizer`]: https://github.com/multi-touch/pinch-gesture-recognizer
+[`RotationGestureRecognizer`]: https://github.com/multi-touch/rotation-gesture-recognizer
+[`SwipeGestureRecognizer`]: https://github.com/multi-touch/swipe-gesture-recognizer
+[`PanGestureRecognizer`]: https://github.com/multi-touch/pan-gesture-recognizer
+[`ScreenEdgePanGestureRecognizer`]: https://github.com/multi-touch/screen-edge-pan-gesture-recognizer
+[`LongPressGestureRecognizer`]: https://github.com/multi-touch/long-press-gesture-recognizer
+[`addTarget`]: #addtarget
+[`removeTarget`]: #removetarget
+[`locationInView`]: #addtarget
+[`locationOfTouch`]: #locationoftouch
+[`numberOfTouches`]: #numberoftouches
+[`state`]: #state
+[`view`]: #view
+[`enabled`]: #enabled
+[`delaysTouchesBegan`]: #delaystouchesbegan
+[`delaysTouchesEnded`]: #delaystouchesended
+[`requireGestureRecognizerToFail`]: #requiregesturerecognizertofail
+[`delegate`]: #delegate
+[`touchesBegan`]: #touchesbegan
+[`touchesMoved`]: #touchesmoved
+[`touchesEnded`]: #touchesended
+[`touchesCancelled`]: #touchescancelled
+[`reset`]: #reset
+[`ignoreTouch`]: #ignoretouch
+[`canBePreventedByGestureRecognizer`]: #canbepreventedbygesturerecognizer
+[`shouldRequireFailureOfGestureRecognizer`]: #shouldrequirefailureofgesturerecognizer
+[`shouldBeRequiredToFailByGestureRecognizer`]: #shouldberequiredtofailbygesturerecognizer
