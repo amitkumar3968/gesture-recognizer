@@ -41,7 +41,7 @@ prototype.addTarget = function (target, action) {
   if (typeof target[action] !== "function")
     throw new Error("The specified action must be a function of the target");
 
-  if (typeof indexOfTargetActionPair(target, action, pairs) !== "number")
+  if (!hasTargetActionPair(target, action, pairs))
     pairs.push([target, action]);
 };
 
@@ -71,4 +71,8 @@ prototype.removeTarget = function (target, action) {
 function indexOfTargetActionPair(target, action, pairs) {
   for (var i = 0, l = pairs.length; i < l; i ++)
     if (pairs[i][0] === target && pairs[i][1] === action) return i;
+}
+
+function hasTargetActionPair(target, action, pairs) {
+  return typeof indexOfTargetActionPair(target, action, pairs) === "number";
 }
